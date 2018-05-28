@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // NDK is probably going to be useful, plus i wana play around with it
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -26,12 +27,17 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
 
-        //somestuffystuffDW
+
+
+
+        //STUFF starts here TODO: lots, lol
+        //commands to be executed
         ArrayList<String>cmds = new ArrayList<String>();
-        cmds.add("wm size 720x1280");
+        cmds.add("wm size 720x1280");//command to be executed currently using a dummy
         final ArrayList<String> cmnds = cmds;
 
 
+        //implementing the class that can do root things
         class C extends ExecuteAsRootBase {
             @Override
             protected ArrayList<String> getCommandsToExecute(){
@@ -41,9 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        //get root permissions
         C.canRunRootCommands();
+
+        //initializing the command execution class
         C ok = new C();
-        ok.execute();
+        ok.execute();//executes commands working
 
 
 
@@ -51,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //might be useful later when we get screen size from user etc
 //    public void runCommands(ArrayList<String> cmds){
 ////        final ArrayList cmnds = cmds;
 ////        new Thread(new Runnable() {
@@ -61,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
 ////            }
 ////        }).start();
 ////    }
+
+
+
+
+
+
 
 
     /**
