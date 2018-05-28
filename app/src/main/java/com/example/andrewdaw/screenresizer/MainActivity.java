@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     // NDK is probably going to be useful, plus i wana play around with it
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -24,39 +26,51 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+//        TextView tv = (TextView) findViewById(R.id.sample_text);
+//        tv.setText(stringFromJNI());
 
 
 
 
         //STUFF starts here TODO: lots, lol
         //commands to be executed
-        ArrayList<String>cmds = new ArrayList<String>();
-        cmds.add("wm size 720x1280");//command to be executed currently using a dummy
-        final ArrayList<String> cmnds = cmds;
 
 
+
+
+
+
+        //get root permissions
+        ExecuteAsRootBase.canRunRootCommands();
+
+
+        executeCommands("wm size 720x1280");
+
+
+
+
+
+    }
+
+
+    /*Executes a terminal command as root
+    *@cmd Command to be executed
+     */
+    public void executeCommands(final String cmd){
         //implementing the class that can do root things
-        class C extends ExecuteAsRootBase {
+        class exeRoot extends ExecuteAsRootBase {
             @Override
             protected ArrayList<String> getCommandsToExecute(){
-                return cmnds;
+                return  new ArrayList<String>() {{
+                    add(cmd);
+
+                }};
             }
 
 
         }
-
-        //get root permissions
-        C.canRunRootCommands();
-
-        //initializing the command execution class
-        C ok = new C();
-        ok.execute();//executes commands working
-
-
-
-
+        //Initializing class
+        new exeRoot().execute();
 
     }
 
