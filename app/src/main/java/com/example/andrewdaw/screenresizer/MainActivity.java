@@ -2,6 +2,7 @@ package com.example.andrewdaw.screenresizer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -54,12 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void bExec(){
-//        TextView tv = (TextView)findViewById(R.id.tRes);
-//        String str = (String) tv.getText();
+    public void bExec(View view){
+       TextView tv = (TextView)findViewById(R.id.tRes);
+       String str = (String) tv.getText().toString();
+       System.out.println(str);
 
 
-        executeCommands("720x1280");
+        executeCommands(str);
 
     }
 
