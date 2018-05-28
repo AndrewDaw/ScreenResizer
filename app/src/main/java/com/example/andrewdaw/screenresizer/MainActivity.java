@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,11 +46,20 @@ public class MainActivity extends AppCompatActivity {
         ExecuteAsRootBase.canRunRootCommands();
 
 
-        executeCommands("wm size 720x1280");
 
 
 
 
+
+
+    }
+
+    public void bExec(){
+//        TextView tv = (TextView)findViewById(R.id.tRes);
+//        String str = (String) tv.getText();
+
+
+        executeCommands("720x1280");
 
     }
 
@@ -62,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected ArrayList<String> getCommandsToExecute(){
                 return  new ArrayList<String>() {{
-                    add(cmd);
+                    add("wm size "+cmd);
 
                 }};
             }
