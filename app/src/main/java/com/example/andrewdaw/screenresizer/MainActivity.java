@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
     public void bExec(View view){
        TextView tv = (TextView)findViewById(R.id.tRes);
        String str = (String) tv.getText().toString();
-       System.out.println(str);
-
-
         executeCommands(str);
 
     }
