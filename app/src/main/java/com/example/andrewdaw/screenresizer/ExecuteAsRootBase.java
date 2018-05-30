@@ -7,6 +7,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/*@author: Some dude on stack overflow
+
+ */
 public abstract class ExecuteAsRootBase
 {
     public static boolean canRunRootCommands()
