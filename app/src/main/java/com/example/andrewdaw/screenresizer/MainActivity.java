@@ -3,6 +3,8 @@ package com.example.andrewdaw.screenresizer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -44,7 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //get root permissions
-        ExecuteAsRootBase.canRunRootCommands();
+        if(
+        ExecuteAsRootBase.canRunRootCommands()){
+            ImageView restricted = (ImageView) findViewById(R.id.ivRestricted);
+            restricted.setVisibility(View.GONE);
+            Button exec = (Button) findViewById(R.id.bExec);
+            exec.setVisibility(View.VISIBLE);
+            findViewById(R.id.tvNoRoot).setVisibility(View.GONE);
+        }
 
 
 
