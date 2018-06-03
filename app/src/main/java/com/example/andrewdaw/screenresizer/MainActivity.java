@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout cl;
     ImageView unlockAni;
     static int ahdee;
+    static String THIS_PHONES_SCREEN_RES;
 
 
     // NDK is probably going to be useful, plus i wana play around with it
@@ -44,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
         unlockAni = new ImageView(this);
         unlockAni.setImageResource(R.drawable.unlock_screen);
         unlockAni.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT));
+
+        //some probs dodgy way of getting the screen res
+        DisplayMetrics disp = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(disp);
+        THIS_PHONES_SCREEN_RES = String.valueOf(disp.heightPixels);
+        THIS_PHONES_SCREEN_RES += "x"+disp.widthPixels;
+
+
+
 
         cl = (ConstraintLayout) findViewById(R.id.lay);
 
