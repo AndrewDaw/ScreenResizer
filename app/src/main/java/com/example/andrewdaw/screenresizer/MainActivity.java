@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView unlockAni;
     static int ahdee;
     static String THIS_PHONES_SCREEN_RES;
+    DisplayMetrics disp;
 
 
     // NDK is probably going to be useful, plus i wana play around with it
@@ -47,32 +48,68 @@ public class MainActivity extends AppCompatActivity {
         unlockAni.setImageResource(R.drawable.unlock_screen);
         unlockAni.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT));
 
-        //some probs dodgy way of getting the screen res
-        DisplayMetrics disp = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(disp);
-        THIS_PHONES_SCREEN_RES = String.valueOf(disp.heightPixels);
-        THIS_PHONES_SCREEN_RES += "x"+disp.widthPixels;
+
 
 
 
 
         cl = (ConstraintLayout) findViewById(R.id.lay);
 
+        disp = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(disp);
+
         // Example of a call to a native method
 //        TextView tv = (TextView) findViewById(R.id.sample_text);
 //        tv.setText(stringFromJNI());
 
 
-        //STUFF starts here TODO: lots, lol
-        //commands to be executed
-
 
     }
 
-    public void bExec(View view) {
+    public void updateDisplayRes(){
+        //getting the screen res
+        disp = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(disp);
+        THIS_PHONES_SCREEN_RES = String.valueOf(disp.widthPixels);
+        THIS_PHONES_SCREEN_RES += "x"+disp.heightPixels;
+
         TextView tv = (TextView) findViewById(R.id.tvRes);
+        tv.setText("Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
+                " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
+
+    }
+
+
+    //checks the new res isnt something crazy before running it
+    public void bExec(View view) {
+
+        Boolean nokwidth = false;
+        Boolean nokheight = false;
+
+
+        TextView tv = (TextView) findViewById(R.id.etRes);
         String str = (String) tv.getText().toString();
-        executeCommands(str);
+
+        int newwidth, newheight;
+
+        newwidth = Integer.parseInt(str.substring(0,str.indexOf('x')));
+        newheight = Integer.parseInt(str.substring(str.indexOf('x')+1,str.length()));
+
+        if(Math.abs((int)disp.widthPixels - newwidth) > 200){
+            nokwidth = true;
+        }
+        if(Math.abs((int)disp.heightPixels - newheight)> 300){
+            nokheight = true;
+        }
+        if(nokheight || nokwidth){
+            tv = (TextView) findViewById(R.id.tvRes);
+            tv.setText("Your new resolution is too far out man!\n Be more careful\n\n"+
+                            "Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
+                    " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
+        }else {
+            executeCommands(str);
+            updateDisplayRes();
+        }
 
     }
 
@@ -85,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.bExec).setVisibility(View.VISIBLE);
             findViewById(R.id.tvNoRoot).setVisibility(View.GONE);
             findViewById(R.id.bGetRoot).setVisibility(View.GONE);
-            displayAnimation();
+//            displayAnimation(); extremely stupid.. do later maybe
+            updateDisplayRes();
+
         }
 
     }
@@ -144,16 +183,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     /*Executes a terminal command as root
-     *@cmd Command to be executed
+     *@size. Size of new screen resolution formatted as widthxheight
      */
-    public void executeCommands(final String cmd) {
+    public void executeCommands(final String size) {
         //implementing the class that can do root things
         class exeRoot extends ExecuteAsRootBase {
             @Override
             protected ArrayList<String> getCommandsToExecute() {
                 return new ArrayList<String>() {{
-                    add("wm size " + cmd);
-
+                    add("wm size " + size); //probs dodgy asf and shud use stringbuilder or something
                 }};
             }
 
@@ -165,17 +203,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //might be useful later when we get screen size from user etc
-//    public void runCommands(ArrayList<String> cmds){
-////        final ArrayList cmnds = cmds;
-////        new Thread(new Runnable() {
-////            public void run() {
-////
-////
-////
-////            }
-////        }).start();
-////    }
+
 
 
     /**
