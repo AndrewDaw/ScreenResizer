@@ -18,7 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+//app now does cool stuff
 public class ChangeRes extends AppCompatActivity {
 
 
