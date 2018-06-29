@@ -1,6 +1,8 @@
 package com.example.andrewdaw.screenresizer;
 
 import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
@@ -56,6 +58,7 @@ public class ChangeRes extends AppCompatActivity {
         seekBarHor.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             int progress = 0;
+            int newRes;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
                 progress = progresValue;
@@ -68,7 +71,8 @@ public void onStartTrackingTouch(SeekBar seekBar) {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                textViewHor.setText("New Horizontal Resolution:" + (HOR_RES+((progress-5)*20)));
+                newRes = (HOR_RES+((progress-5)*20));
+                textViewHor.setText("New Horizontal Resolution: " + newRes);
 
             }
         });
@@ -77,10 +81,11 @@ public void onStartTrackingTouch(SeekBar seekBar) {
 
 
         // Initialize the vertical seek bar
-        textViewVert.setText("Vertical Resolution:" + VERT_RES);
+        textViewVert.setText("Vertical Resolution: " + VERT_RES);
         seekBarVert.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             int progress = 0;
+            int newRes;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
                 progress = progresValue;
@@ -93,7 +98,8 @@ public void onStartTrackingTouch(SeekBar seekBar) {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                textViewVert.setText("New Vertical Resolution:" + (VERT_RES+((progress-5)*40)));
+                newRes = (VERT_RES+((progress-5)*40));
+                textViewVert.setText("New Vertical Resolution: " + newRes);
 
             }
         });
@@ -123,42 +129,23 @@ public void onStartTrackingTouch(SeekBar seekBar) {
 
 
         TextView tv = (TextView) findViewById(R.id.tvRes);
-        tv.setText("Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
-                " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
+        tv.setText("Your screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\n"+
+                " Multiple resizes may render phone unusable\nand require adb commands via usb to fix!");
 
     }
 
 
-    //checks the new res isnt something crazy before running it
+
     public void bExec(View view) {
 
-        Boolean nokwidth = false;
-        Boolean nokheight = false;
+        String str = textViewHor.getText().toString().substring(textViewHor.getText().toString().indexOf(":")+2) + "x" +
+        textViewVert.getText().toString().substring(textViewVert.getText().toString().indexOf(":")+2);
 
+        executeCommands(str);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
 
-//        TextView tv = (TextView) findViewById(R.id.etRes);
-//        String str = (String) tv.getText().toString();
-
-        int newwidth, newheight;
-
-//        newwidth = Integer.parseInt(str.substring(0,str.indexOf('x')));
-//        newheight = Integer.parseInt(str.substring(str.indexOf('x')+1,str.length()));
-
-//        if(Math.abs((int)disp.widthPixels - newwidth) > 200){
-//            nokwidth = true;
-//        }
-//        if(Math.abs((int)disp.heightPixels - newheight)> 300){
-//            nokheight = true;
-//        }
-//        if(nokheight || nokwidth){
-//            tv = (TextView) findViewById(R.id.tvRes);
-//            tv.setText("Your new resolution is too far out man!\n Be more careful\n\n"+
-//                    "Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
-//                    " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
-//        }else {
-//            executeCommands(str);
-//            updateDisplayRes();
-//        }
 
     }
 
