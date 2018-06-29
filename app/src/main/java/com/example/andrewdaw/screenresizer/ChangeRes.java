@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,9 +22,12 @@ public class ChangeRes extends AppCompatActivity {
 
     ConstraintLayout cl;
     ImageView unlockAni;
-    static int ahdee;
+    static int ahdee, HOR_RES, VERT_RES;
     static String THIS_PHONES_SCREEN_RES;
     DisplayMetrics disp;
+    private SeekBar seekBarHor, seekBarVert;
+    private TextView textViewHor, textViewVert;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +47,80 @@ public class ChangeRes extends AppCompatActivity {
         disp = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(disp);
         updateDisplayRes();
+        initializeVariables();
 
 
+
+        // Initialize the horizontal seek bar
+        textViewHor.setText("Horizontal Resolution: " + HOR_RES );
+        seekBarHor.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            int progress = 0;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                progress = progresValue;
+
+            }
+            @Override
+public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                textViewHor.setText("New Horizontal Resolution:" + (HOR_RES+((progress-5)*20)));
+
+            }
+        });
+
+
+
+
+        // Initialize the vertical seek bar
+        textViewVert.setText("Vertical Resolution:" + VERT_RES);
+        seekBarVert.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            int progress = 0;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                progress = progresValue;
+
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                textViewVert.setText("New Vertical Resolution:" + (VERT_RES+((progress-5)*40)));
+
+            }
+        });
     }
+
+        // A private method to help us initialize our variables.
+    private void initializeVariables() {
+        seekBarHor = (SeekBar) findViewById(R.id.seekBarHorRes);
+        textViewHor = (TextView) findViewById(R.id.tvHorRes);
+        seekBarVert = (SeekBar) findViewById(R.id.seekBarVertRes);
+        textViewVert = (TextView) findViewById(R.id.tvVertRes);
+    }
+
+
+
+
 
 
     public void updateDisplayRes(){
         //getting the screen res
         disp = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(disp);
+        HOR_RES = disp.widthPixels;
+        VERT_RES = disp.heightPixels;
         THIS_PHONES_SCREEN_RES = String.valueOf(disp.widthPixels);
         THIS_PHONES_SCREEN_RES += "x"+disp.heightPixels;
+
 
         TextView tv = (TextView) findViewById(R.id.tvRes);
         tv.setText("Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
@@ -69,29 +136,29 @@ public class ChangeRes extends AppCompatActivity {
         Boolean nokheight = false;
 
 
-        TextView tv = (TextView) findViewById(R.id.etRes);
-        String str = (String) tv.getText().toString();
+//        TextView tv = (TextView) findViewById(R.id.etRes);
+//        String str = (String) tv.getText().toString();
 
         int newwidth, newheight;
 
-        newwidth = Integer.parseInt(str.substring(0,str.indexOf('x')));
-        newheight = Integer.parseInt(str.substring(str.indexOf('x')+1,str.length()));
+//        newwidth = Integer.parseInt(str.substring(0,str.indexOf('x')));
+//        newheight = Integer.parseInt(str.substring(str.indexOf('x')+1,str.length()));
 
-        if(Math.abs((int)disp.widthPixels - newwidth) > 200){
-            nokwidth = true;
-        }
-        if(Math.abs((int)disp.heightPixels - newheight)> 300){
-            nokheight = true;
-        }
-        if(nokheight || nokwidth){
-            tv = (TextView) findViewById(R.id.tvRes);
-            tv.setText("Your new resolution is too far out man!\n Be more careful\n\n"+
-                    "Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
-                    " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
-        }else {
-            executeCommands(str);
-            updateDisplayRes();
-        }
+//        if(Math.abs((int)disp.widthPixels - newwidth) > 200){
+//            nokwidth = true;
+//        }
+//        if(Math.abs((int)disp.heightPixels - newheight)> 300){
+//            nokheight = true;
+//        }
+//        if(nokheight || nokwidth){
+//            tv = (TextView) findViewById(R.id.tvRes);
+//            tv.setText("Your new resolution is too far out man!\n Be more careful\n\n"+
+//                    "Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
+//                    " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
+//        }else {
+//            executeCommands(str);
+//            updateDisplayRes();
+//        }
 
     }
 
