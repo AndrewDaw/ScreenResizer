@@ -2,6 +2,7 @@ package com.example.andrewdaw.screenresizer;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -66,64 +67,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void updateDisplayRes(){
-        //getting the screen res
-        disp = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(disp);
-        THIS_PHONES_SCREEN_RES = String.valueOf(disp.widthPixels);
-        THIS_PHONES_SCREEN_RES += "x"+disp.heightPixels;
-
-        TextView tv = (TextView) findViewById(R.id.tvRes);
-        tv.setText("Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
-                " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
-
-    }
 
 
-    //checks the new res isnt something crazy before running it
-    public void bExec(View view) {
-
-        Boolean nokwidth = false;
-        Boolean nokheight = false;
 
 
-        TextView tv = (TextView) findViewById(R.id.etRes);
-        String str = (String) tv.getText().toString();
-
-        int newwidth, newheight;
-
-        newwidth = Integer.parseInt(str.substring(0,str.indexOf('x')));
-        newheight = Integer.parseInt(str.substring(str.indexOf('x')+1,str.length()));
-
-        if(Math.abs((int)disp.widthPixels - newwidth) > 200){
-            nokwidth = true;
-        }
-        if(Math.abs((int)disp.heightPixels - newheight)> 300){
-            nokheight = true;
-        }
-        if(nokheight || nokwidth){
-            tv = (TextView) findViewById(R.id.tvRes);
-            tv.setText("Your new resolution is too far out man!\n Be more careful\n\n"+
-                            "Yer screen res currently = "+THIS_PHONES_SCREEN_RES+"\n\nPlz Note"+
-                    " multiple resizes may cause you belly ache\nand require adb commands via usb to fix!");
-        }else {
-            executeCommands(str);
-            updateDisplayRes();
-        }
-
-    }
 
     //get root permissions and gets 'unlocks' app
     public void bGetRoot(View view) {
         //get root permissions and gets 'unlocks' app
         if (
                 ExecuteAsRootBase.canRunRootCommands()) {
-            findViewById(R.id.ivRestricted).setVisibility(View.GONE);
-            findViewById(R.id.bExec).setVisibility(View.VISIBLE);
-            findViewById(R.id.tvNoRoot).setVisibility(View.GONE);
-            findViewById(R.id.bGetRoot).setVisibility(View.GONE);
 //            displayAnimation(); extremely stupid.. do later maybe
-            updateDisplayRes();
+            Intent i = new Intent(getApplicationContext(), ChangeRes.class);
+            startActivity(i);
 
         }
 
@@ -182,25 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*Executes a terminal command as root
-     *@size. Size of new screen resolution formatted as widthxheight
-     */
-    public void executeCommands(final String size) {
-        //implementing the class that can do root things
-        class exeRoot extends ExecuteAsRootBase {
-            @Override
-            protected ArrayList<String> getCommandsToExecute() {
-                return new ArrayList<String>() {{
-                    add("wm size " + size); //probs dodgy asf and shud use stringbuilder or something
-                }};
-            }
 
-
-        }
-        //Initializing class
-        new exeRoot().execute();
-
-    }
 
 
 
