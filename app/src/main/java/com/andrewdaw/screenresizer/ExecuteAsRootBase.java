@@ -1,4 +1,4 @@
-package com.example.andrewdaw.screenresizer;
+package com.andrewdaw.screenresizer;
 
 import android.util.Log;
 

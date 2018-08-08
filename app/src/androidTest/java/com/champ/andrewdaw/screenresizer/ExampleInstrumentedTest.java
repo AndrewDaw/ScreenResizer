@@ -1,4 +1,4 @@
-package com.example.andrewdaw.screenresizer;
+package com.champ.andrewdaw.screenresizer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
