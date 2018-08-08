@@ -1,53 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/lay"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.andrewdaw.screenresizer.MainActivity">
+
+    <ImageView
+        android:id="@+id/ivRestricted"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:color/holo_blue_light" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:gravity="top|center_horizontal">\
+
+        <TextView
+            android:id="@+id/tvNoRoot"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="In order to change the resolution of your devices screen this app requires root privileges, to learn more about root privileges visit https://en.wikipedia.org/wiki/Rooting_(Android)"
+            android:textAppearance="@color/colorPrimary"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:autoLink = "web"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/bGetRoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="bGetRoot"
+            android:text="Allow Root Access"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/tvDescribe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Usage: Decrease vertical or horizontal resolution in small increments untill cracked area is outside the new screen size."
+            android:textAppearance="@color/colorPrimary"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:autoLink = "web"
+            android:layout_marginTop="10dp"/>
 
 
 
 
-
-
-
-
-
-
-<Button
-    android:id="@+id/bGetRoot"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="92dp"
-    android:onClick="bGetRoot"
-    android:text="Give me root access\n ;)"
-    app:layout_constraintBottom_toBottomOf="@id/tvNoRoot"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.565" />
-
-<ImageView
-    android:id="@+id/ivRestricted"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    app:srcCompat="@android:color/holo_red_dark" />
-
-<TextView
-    android:id="@+id/tvNoRoot"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="200dp"
-    android:text="THIS APP REQUIRES ROOT"
-    android:textAppearance="@color/colorPrimary"
-    android:textSize="50px"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:layout_editor_absoluteY="295dp" />
-
-
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

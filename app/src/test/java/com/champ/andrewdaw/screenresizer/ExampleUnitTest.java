@@ -1,4 +1,4 @@
-package com.example.andrewdaw.screenresizer;
+package com.champ.andrewdaw.screenresizer;
 
 import org.junit.Test;
 
