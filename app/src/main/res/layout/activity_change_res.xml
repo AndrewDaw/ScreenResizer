@@ -110,5 +110,19 @@
         android:layout_height="wrap_content"
         app:barrierDirection="top" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="71dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarVertRes"
+        app:layout_constraintVertical_bias="0.034"
+        app:srcCompat="@drawable/draw_to_resize_button"
+        android:onClick="drawResize"/>
+
+
 
 </android.support.constraint.ConstraintLayout>

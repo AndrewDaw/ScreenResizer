@@ -149,56 +149,9 @@ public void onStartTrackingTouch(SeekBar seekBar) {
 
 
 
-    public void displayAnimation() {
-        int id;
-        new Thread(new Runnable() {
-            int ids;
-
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-
-
-                        cl.addView(unlockAni);
-                        unlockAni.generateViewId();
-                        ahdee = unlockAni.getId();
-                        System.out.println("\n*\n*\n*\n*\n*\n*\n*\n*\n\n"+unlockAni.getId()+"\n*\n*\n*\n*\n*\n*\n*\n*\n\n");
-                        System.out.println("\n*\n*\n*\n*\n*\n*\n*\n*\n\n"+ahdee+"\n*\n*\n*\n*\n*\n*\n*\n*\n\n");
-
-                    }
-
-                });
-
-
-                try {
-                    SystemClock.sleep(2000);
-                } catch (Exception e) {
-                    //and do nothing!
-                }
-
-                runOnUiThread(new Runnable() {
-                    public void run() {
-
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-
-
-                                System.out.println("\n*\n*\n*\n##\n##\n##\n##\n##\n\n"+ahdee+"\n*\n*\n*\n*\n*\n*\n*\n*\n\n");
-                                findViewById(ahdee).setVisibility(View.GONE);
-                            }
-                        });
-
-
-                    }
-                });
-
-
-            }
-
-
-        }).start();
-
-
+    public void drawResize(View view){
+        Intent i = new Intent(getApplicationContext(), DrawResize.class);
+        startActivity(i);
     }
 
 
