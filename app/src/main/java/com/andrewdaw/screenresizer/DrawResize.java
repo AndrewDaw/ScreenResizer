@@ -1,12 +1,16 @@
 package com.andrewdaw.screenresizer;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.champ.andrewdaw.screenresizer.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -18,6 +22,18 @@ public class DrawResize extends AppCompatActivity {
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
     private static final boolean AUTO_HIDE = true;
+
+
+    /**
+     * For checking if its the first or 2nd touch
+     */
+    private static boolean finalTouch = false;
+
+    /**Coords to get from touches
+     *
+     */
+    private int x1=0,y1=0,x2=0,y2=0;
+    Intent i;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -79,7 +95,38 @@ public class DrawResize extends AppCompatActivity {
             if (AUTO_HIDE) {
                 delayedHide(AUTO_HIDE_DELAY_MILLIS);
             }
+
+
             return false;
+        }
+    };
+
+    private View.OnTouchListener handleTouch = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+
+                    i.putExtra("x1", (int)event.getRawX());
+                    i.putExtra("y1", (int)event.getRawY());
+
+                    break;
+                case MotionEvent.ACTION_UP:
+                    i.putExtra("x2", (int)event.getRawX());
+                    i.putExtra("y2", (int)event.getRawY());
+                    startActivity(i);
+                    break;
+
+
+
+            }
+
+
+            return true;
         }
     };
 
@@ -91,6 +138,7 @@ public class DrawResize extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
+
         mContentView = findViewById(R.id.fullscreen_content);
 
 
@@ -106,7 +154,11 @@ public class DrawResize extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.fullscreen_content).setOnTouchListener(handleTouch);
+        i = new Intent(getApplicationContext(), ChangeRes.class);
     }
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

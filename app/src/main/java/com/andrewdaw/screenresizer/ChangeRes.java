@@ -7,6 +7,7 @@ import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ public class ChangeRes extends AppCompatActivity {
     DisplayMetrics disp;
     private SeekBar seekBarHor, seekBarVert;
     private TextView textViewHor, textViewVert;
+    private static final String TAG = "ChangeRes";
 
 
     @Override
@@ -101,6 +103,33 @@ public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
         });
+
+
+
+        //checks if were on our way back from the draw new screen size view, if we are then
+        //use the details
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+
+            //have a look at what we got
+//            Log.i(TAG,""+extras.getInt("x1"));
+//            Log.i(TAG,""+extras.getInt("y1"));
+//            Log.i(TAG,""+extras.getInt("x2"));
+//            Log.i(TAG,""+extras.getInt("y2"));
+
+            //get extras from intent
+            int x1 = extras.getInt("x1");
+            int y1 = extras.getInt("y1");
+            int x2 = extras.getInt("x2");
+            int y2 = extras.getInt("y2");
+
+
+            //convert finds the width and sets the fields (which are used for executing the resize
+            //command)
+            textViewHor.setText("New Horizontal Resolution: "+(x2-x1));
+            textViewVert.setText("New Vertical Resolution: "+ (y2-y1));
+
+        }
     }
 
         // A private method to help us initialize our variables.
