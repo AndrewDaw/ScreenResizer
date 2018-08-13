@@ -128,6 +128,10 @@ public void onStartTrackingTouch(SeekBar seekBar) {
             //command)
             textViewHor.setText("New Horizontal Resolution: "+(x2-x1));
             textViewVert.setText("New Vertical Resolution: "+ (y2-y1));
+            getIntent().removeExtra("x1");
+            getIntent().removeExtra("x2");
+            getIntent().removeExtra("y1");
+            getIntent().removeExtra("y2");
 
         }
     }
