@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WindowsInstructions">
+
+
+
+    <ImageView
+        android:id="@+id/ivRestricted"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        app:srcCompat="@android:color/holo_blue_light" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:gravity="top|center_horizontal"
+        android:isScrollContainer="true">
+
+        <TextView
+            android:id="@+id/tvRes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="center"
+            android:textColor="@color/colorPrimaryDark"/>
+
+
+        <TextView
+            android:id="@+id/tv0"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="This will take around 10 minutes. Note down your screen resolution
+as listed above, you will use this when adjusting your screen size and if you want to get your old
+screen resolution back"
+            android:textAppearance="@color/colorPrimary"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:autoLink = "web"
+            android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Step 1: Vist https://developer.android.com/studio/releases/platform-tools
+on your computer and download SDK Platform-Tools for windows and extract the folder to somewhere
+you will remember"
+        android:textAppearance="@color/colorPrimary"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:autoLink = "web"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Step 2: Open the folder you extracted the platform tools to and copy the
+path to this directory"
+        android:textAppearance="@color/colorPrimary"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:autoLink = "web"
+        android:layout_marginTop="10dp"/>
+
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:src="@drawable/copy_and_paste" />
+
+
+     <TextView
+        android:id="@+id/tv3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Step 3: Open a command prompt (windows key + r, type cmd, hit enter) and
+then type cd put a space and then right click to paste in path you copied in step 2, hit enter"
+        android:textAppearance="@color/colorPrimary"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:autoLink = "web"
+        android:layout_marginTop="10dp"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pasted_path" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Step 4: Set your phone to allow USB debugging if not already enabled
+to do this you will need to first need to enable developer options on your device. Go to settings
+on your phone and then scroll to about phone, from here go to software information and then tap
+build number multiple times untill it says developer mode is enabled. Now you have developer options
+enabled go back to the main settings menu and go into the new developer options, from here enable USB debugging.
+Plug your phone via usb into your computer"
+        android:textAppearance="@color/colorPrimary"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:autoLink = "web"
+        android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Step 5: Now back on your computer, in the opened command prompt issue
+the command adb shell wm size /horizontal/x/vertical/
+where /horizontal/ and /vertical/ is the new resolution you want youre phone. We would reccomend
+starting out at your phones original resolution and decreasing 10 pixels at a time"
+            android:textAppearance="@color/colorPrimary"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:autoLink = "web"
+            android:layout_marginTop="10dp"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/adb_shell_command" />
+
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

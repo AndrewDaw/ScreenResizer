@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.andrewdaw.screenresizer.ChangeResNoRoot">
+
+
+    <ImageView
+        android:id="@+id/ivRestricted"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:color/holo_blue_light" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:gravity="top|center_horizontal"
+            android:isScrollContainer="true">
+
+            <TextView
+                android:id="@+id/tvNoRoot"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="In order to change the resolution of your device you will need access to a computer. Please choose your computers operating system below"
+                android:textAppearance="@color/colorPrimary"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:autoLink = "web"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/bWindows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bWindows"
+                android:text="Windows"
+                android:layout_marginTop="30dp"/>
+
+            <Button
+                android:id="@+id/bOSX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bOSX"
+                android:text="OSX"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/bLinux"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bLinux"
+                android:text="Linux"
+                android:layout_marginTop="20dp"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

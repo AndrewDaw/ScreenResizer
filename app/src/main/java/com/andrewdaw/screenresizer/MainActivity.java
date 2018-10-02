@@ -55,12 +55,16 @@ public class MainActivity extends AppCompatActivity {
         //get root permissions and gets 'unlocks' app
         if (
                 ExecuteAsRootBase.canRunRootCommands()) {
-//            displayAnimation(); extremely stupid.. do later maybe
             Intent i = new Intent(getApplicationContext(), ChangeRes.class);
             startActivity(i);
 
         }
 
+    }
+
+    public void bNoRoot(View view){
+        Intent i = new Intent(getApplicationContext(), ChangeResNoRoot.class);
+        startActivity(i);
     }
 
 

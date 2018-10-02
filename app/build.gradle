@@ -1,19 +1,28 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        kk {
+            keyAlias 'key0'
+            keyPassword '4495869Bb'
+            storeFile file('C:/Users/Andrew Daw/ScreenResizer/kk.jks')
+            storePassword '4495869Bb'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.andrewdaw.screenresizer"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 4
-        versionName "4"
+        versionCode 5
+        versionName "5.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
                 cppFlags ""
             }
         }
+        signingConfig signingConfigs.kk
     }
     buildTypes {
         release {
@@ -26,10 +35,12 @@ android {
             path "CMakeLists.txt"
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:design:27.1.1'

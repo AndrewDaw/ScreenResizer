@@ -21,7 +21,6 @@ public class ChangeRes extends AppCompatActivity {
 
 
     ConstraintLayout cl;
-    ImageView unlockAni;
     static int ahdee, HOR_RES, VERT_RES;
     static String THIS_PHONES_SCREEN_RES;
     DisplayMetrics disp;
@@ -33,9 +32,6 @@ public class ChangeRes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_res);
-        unlockAni = new ImageView(this);
-        unlockAni.setImageResource(R.drawable.unlock_screen);
-        unlockAni.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT));
 
 
 
@@ -148,58 +144,6 @@ public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
 
-
-    public void displayAnimation() {
-        int id;
-        new Thread(new Runnable() {
-            int ids;
-
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-
-
-                        cl.addView(unlockAni);
-                        unlockAni.generateViewId();
-                        ahdee = unlockAni.getId();
-                        System.out.println("\n*\n*\n*\n*\n*\n*\n*\n*\n\n"+unlockAni.getId()+"\n*\n*\n*\n*\n*\n*\n*\n*\n\n");
-                        System.out.println("\n*\n*\n*\n*\n*\n*\n*\n*\n\n"+ahdee+"\n*\n*\n*\n*\n*\n*\n*\n*\n\n");
-
-                    }
-
-                });
-
-
-                try {
-                    SystemClock.sleep(2000);
-                } catch (Exception e) {
-                    //and do nothing!
-                }
-
-                runOnUiThread(new Runnable() {
-                    public void run() {
-
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-
-
-                                System.out.println("\n*\n*\n*\n##\n##\n##\n##\n##\n\n"+ahdee+"\n*\n*\n*\n*\n*\n*\n*\n*\n\n");
-                                findViewById(ahdee).setVisibility(View.GONE);
-                            }
-                        });
-
-
-                    }
-                });
-
-
-            }
-
-
-        }).start();
-
-
-    }
 
 
     /*Executes a terminal command as root

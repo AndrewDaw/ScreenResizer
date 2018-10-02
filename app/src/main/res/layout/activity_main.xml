@@ -19,6 +19,17 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:color/holo_blue_light" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -27,13 +38,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:gravity="top|center_horizontal">\
+        android:gravity="top|center_horizontal"
+        android:isScrollContainer="true">
 
         <TextView
             android:id="@+id/tvNoRoot"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="In order to change the resolution of your devices screen this app requires root privileges, to learn more about root privileges visit https://en.wikipedia.org/wiki/Rooting_(Android)"
+            android:text="In order to change the resolution of your devices screen this app is most easy to use if you have root privileges, to learn more about root privileges visit https://en.wikipedia.org/wiki/Rooting_(Android)"
             android:textAppearance="@color/colorPrimary"
             android:textSize="16dp"
             android:textAlignment="center"
@@ -59,10 +71,32 @@
             android:autoLink = "web"
             android:layout_marginTop="10dp"/>
 
+        <Button
+            android:id="@+id/NoRoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="bNoRoot"
+            android:text="Proceed without root"
+            android:textColor="@android:color/white"
+            android:background="@android:color/black"
+
+            android:layout_marginTop="60dp"/>
+
+        <TextView
+            android:id="@+id/tvDescribeNoRoot"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autoLink="web"
+            android:text="Note: Screen resizing is possible without root access, however there are extra steps and you will need to plug into a computer via usb."
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
+
 
 
 
     </LinearLayout>
 
-
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
