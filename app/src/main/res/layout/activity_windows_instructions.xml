@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WindowsInstructions">
+    tools:context="com.andrewdaw.screenresizer.WindowsInstructions">
 
 
 
@@ -97,7 +97,7 @@ path to this directory"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Step 3: Open a command prompt (windows key + r, type cmd, hit enter) and
-then type cd put a space and then right click to paste in path you copied in step 2, hit enter"
+then type cd put a space and then right click to paste in the path you copied in step 2, issue the command by hitting enter"
         android:textAppearance="@color/colorPrimary"
         android:textSize="16dp"
         android:textAlignment="center"
@@ -114,8 +114,8 @@ then type cd put a space and then right click to paste in path you copied in ste
         android:id="@+id/tv4"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Step 4: Set your phone to allow USB debugging if not already enabled
-to do this you will need to first need to enable developer options on your device. Go to settings
+        android:text="Step 4: Set your phone to allow USB debugging if not already enabled.
+To do this you will need to first enable developer options on your device. Go to settings
 on your phone and then scroll to about phone, from here go to software information and then tap
 build number multiple times untill it says developer mode is enabled. Now you have developer options
 enabled go back to the main settings menu and go into the new developer options, from here enable USB debugging.
@@ -131,7 +131,7 @@ Plug your phone via usb into your computer"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Step 5: Now back on your computer, in the opened command prompt issue
-the command adb shell wm size /horizontal/x/vertical/
+the command \nadb shell wm size /horizontal/x/vertical/\n
 where /horizontal/ and /vertical/ is the new resolution you want youre phone. We would reccomend
 starting out at your phones original resolution and decreasing 10 pixels at a time"
             android:textAppearance="@color/colorPrimary"

@@ -1,9 +1,12 @@
 package com.andrewdaw.screenresizer;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -38,12 +41,23 @@ public class ChangeRes extends AppCompatActivity {
 
 
 
+
         cl = (ConstraintLayout) findViewById(R.id.lay);
 
         disp = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(disp);
         updateDisplayRes();
         initializeVariables();
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor edit = settings.edit();
+        if((settings.getString("ScreenRes", "n/a").compareTo("n/a")) == 0) {
+            edit.putString("ScreenRes", THIS_PHONES_SCREEN_RES);
+            edit.apply();
+        }
+        String default_screen_res = settings.getString("ScreenRes", "n/a");
+        TextView reset = (TextView) findViewById(R.id.tvReset);
+        reset.setText("Default screen resolution is " + default_screen_res);
 
 
 
@@ -140,6 +154,12 @@ public void onStartTrackingTouch(SeekBar seekBar) {
         finish();
         startActivity(intent);
 
+
+    }
+
+    public void bReset(View view){
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        executeCommands(settings.getString("ScreenRes", "n/a"));
 
     }
 
